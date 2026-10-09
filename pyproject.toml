@@ -1,0 +1,42 @@
+[project]
+name = "wellforecast"
+version = "1.0.0"
+description = "Oil-well production forecasting on the real Volve field: Arps decline-curve analysis plus a gradient-boosting correction, with a leakage-free temporal benchmark."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Angelo David Padilla Romero" }]
+
+dependencies = [
+  "pandas>=2.2",
+  "numpy>=2.1",
+  "scipy>=1.13",
+  "scikit-learn>=1.5",
+  "openpyxl>=3.1",
+  "pyarrow>=16.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3", "pytest-cov>=6.0", "ruff>=0.8"]
+
+[project.scripts]
+wellforecast = "wellforecast.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["wellforecast*"]
+
+[tool.pytest.ini_options]
+addopts = "-q --strict-markers"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "W"]
+ignore = ["B008"]
